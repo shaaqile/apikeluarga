@@ -2,29 +2,29 @@
 
 namespace App\Controllers;
 
-use App\Models\pegawaiModel;
+use App\Models\keluargaModel;
 use CodeIgniter\API\ResponseTrait;
 
-class Pegawai extends BaseController
+class Keluarga extends BaseController
 {
 
     use ResponseTrait;
-    protected $pegawaiModel;
+    protected $keluargaModel;
 
     public function __construct()
     {
-        $this->pegawaiModel = new pegawaiModel();
+        $this->keluargaModel = new keluargaModel();
     }
 
     public function index()
     {
-        $data = $this->pegawaiModel->findAll();
+        $data = $this->keluargaModel->findAll();
         return $this->respond($data, 200);
     }
 
     public function show($id)
     {
-        $data = $this->pegawaiModel->where('pegawai_id', $id)->findAll();
+        $data = $this->keluargaModel->where('id', $id)->findAll();
         if ($data) {
             return $this->respond($data, 200);
         } else {
@@ -35,19 +35,9 @@ class Pegawai extends BaseController
     public function create()
     {
 
-        // $nama = $this->request->getVar('nama');
-        // $jabatan = $this->request->getVar('jabatan');
-        // $kontrak = $this->request->getVar('kontrak');
-
-        // $data = [
-        //     'pegawai_name' => $nama,
-        //     'jabatan_id' => $jabatan,
-        //     'kontrak_id' => $kontrak
-        // ];
-
         $data = $this->request->getPost();
-        if (!$this->pegawaiModel->insert($data)) {
-            return $this->fail($this->pegawaiModel->errors());
+        if (!$this->keluargaModel->insert($data)) {
+            return $this->fail($this->keluargaModel->errors());
         }
 
         $response = [
